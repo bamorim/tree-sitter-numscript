@@ -1,0 +1,37 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "numscript",
+      "camelcase": "Numscript",
+      "title": "Numscript",
+      "scope": "source.numscript",
+      "file-types": ["numscript"],
+      "injection-regex": "^numscript$",
+      "class-name": "TreeSitterNumscript"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Numscript grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Bernardo Amorim"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/bamorim/tree-sitter-numscript"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
+

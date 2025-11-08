@@ -1,0 +1,1073 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "numscript",
+  "rules": {
+    "program": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "vars_declaration"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        }
+      ]
+    },
+    "line_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "//"
+          },
+          {
+            "type": "PATTERN",
+            "value": ".*"
+          }
+        ]
+      }
+    },
+    "multiline_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "/*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+          },
+          {
+            "type": "STRING",
+            "value": "/"
+          }
+        ]
+      }
+    },
+    "vars_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "vars"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "var_declaration"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "var_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_name"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "var_origin"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "var_origin": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        }
+      ]
+    },
+    "statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "send_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "save_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fn_call_statement"
+        }
+      ]
+    },
+    "send_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "send"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "sent_value"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": "source"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "source"
+        },
+        {
+          "type": "STRING",
+          "value": "destination"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "destination"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "save_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "save"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "sent_value"
+        },
+        {
+          "type": "STRING",
+          "value": "from"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        }
+      ]
+    },
+    "fn_call_statement": {
+      "type": "SYMBOL",
+      "name": "function_call"
+    },
+    "sent_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          },
+          "named": true,
+          "value": "sent_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "sent_all_lit"
+        }
+      ]
+    },
+    "sent_all_lit": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "FIELD",
+          "name": "asset",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "value_expr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "variable_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asset_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "account_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "percentage_portion_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "monetary_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "infix_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parenthesized_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "application"
+        }
+      ]
+    },
+    "variable_expr": {
+      "type": "SYMBOL",
+      "name": "variable_name"
+    },
+    "asset_literal": {
+      "type": "SYMBOL",
+      "name": "asset"
+    },
+    "string_literal": {
+      "type": "SYMBOL",
+      "name": "string"
+    },
+    "account_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "account_literal_part"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ":"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "account_literal_part"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "account_literal_part": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "account_text"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_name"
+          },
+          "named": true,
+          "value": "account_var"
+        }
+      ]
+    },
+    "number_literal": {
+      "type": "SYMBOL",
+      "name": "number"
+    },
+    "percentage_portion_literal": {
+      "type": "SYMBOL",
+      "name": "percentage_portion"
+    },
+    "monetary_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "FIELD",
+          "name": "asset",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "amount",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "infix_expr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "left",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "value_expr"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "op",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "+"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "-"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "value_expr"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 2,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "left",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "value_expr"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "op",
+                "content": {
+                  "type": "STRING",
+                  "value": "/"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "value_expr"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "parenthesized_expr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "application": {
+      "type": "SYMBOL",
+      "name": "function_call"
+    },
+    "function_call": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "STRING",
+                "value": "overdraft"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "function_call_args"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "function_call_args": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "value_expr"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "source": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "src_account_unbounded_overdraft"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "src_account_bounded_overdraft"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "src_account"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "src_allotment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "src_inorder"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "src_oneof"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "src_capped"
+        }
+      ]
+    },
+    "src_account_unbounded_overdraft": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "address",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "color_constraint"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "allowing"
+        },
+        {
+          "type": "STRING",
+          "value": "unbounded"
+        },
+        {
+          "type": "STRING",
+          "value": "overdraft"
+        }
+      ]
+    },
+    "src_account_bounded_overdraft": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "address",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "color_constraint"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "allowing"
+        },
+        {
+          "type": "STRING",
+          "value": "overdraft"
+        },
+        {
+          "type": "STRING",
+          "value": "up"
+        },
+        {
+          "type": "STRING",
+          "value": "to"
+        },
+        {
+          "type": "FIELD",
+          "name": "max_overdraft",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        }
+      ]
+    },
+    "src_account": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "color_constraint"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "src_allotment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "allotment_clause_src"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "src_inorder": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "source"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "src_oneof": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "oneof"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "source"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "src_capped": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "max"
+        },
+        {
+          "type": "FIELD",
+          "name": "cap",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_expr"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "from"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "source"
+        }
+      ]
+    },
+    "allotment_clause_src": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "allotment"
+        },
+        {
+          "type": "STRING",
+          "value": "from"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "source"
+        }
+      ]
+    },
+    "destination": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "dest_account"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dest_allotment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dest_inorder"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dest_oneof"
+        }
+      ]
+    },
+    "dest_account": {
+      "type": "SYMBOL",
+      "name": "value_expr"
+    },
+    "dest_allotment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "allotment_clause_dest"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "dest_inorder": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "destination_in_order_clause"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "remaining"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kept_or_destination"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "dest_oneof": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "oneof"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "destination_in_order_clause"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "remaining"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kept_or_destination"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "allotment_clause_dest": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "allotment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kept_or_destination"
+        }
+      ]
+    },
+    "destination_in_order_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "max"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kept_or_destination"
+        }
+      ]
+    },
+    "kept_or_destination": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "destination_to"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "destination_kept"
+        }
+      ]
+    },
+    "destination_to": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "to"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "destination"
+        }
+      ]
+    },
+    "destination_kept": {
+      "type": "STRING",
+      "value": "kept"
+    },
+    "allotment": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "portioned_allotment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "remaining_allotment"
+        }
+      ]
+    },
+    "portioned_allotment": {
+      "type": "SYMBOL",
+      "name": "value_expr"
+    },
+    "remaining_allotment": {
+      "type": "STRING",
+      "value": "remaining"
+    },
+    "color_constraint": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\\"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value_expr"
+        }
+      ]
+    },
+    "variable_name": {
+      "type": "PATTERN",
+      "value": "\\$[a-z_]+[a-z0-9_]*"
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-z]+[a-z_]*"
+    },
+    "number": {
+      "type": "PATTERN",
+      "value": "-?[0-9]+(_[0-9]+)*"
+    },
+    "asset": {
+      "type": "PATTERN",
+      "value": "[A-Z][A-Z0-9]*(\\/[0-9]+)?"
+    },
+    "percentage_portion": {
+      "type": "PATTERN",
+      "value": "[0-9]+(\\.[0-9]+)?%"
+    },
+    "string": {
+      "type": "PATTERN",
+      "value": "\"([^\"\\r\\n]|\\\\\")*\""
+    },
+    "account_text": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9_-]+"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "line_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "multiline_comment"
+    }
+  ],
+  "conflicts": [
+    [
+      "dest_inorder",
+      "remaining_allotment"
+    ]
+  ],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}

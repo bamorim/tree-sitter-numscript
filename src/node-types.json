@@ -1,0 +1,1152 @@
+[
+  {
+    "type": "account_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account_literal_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "account_literal_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "account_text",
+          "named": true
+        },
+        {
+          "type": "account_var",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "allotment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "portioned_allotment",
+          "named": true
+        },
+        {
+          "type": "remaining_allotment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "allotment_clause_dest",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "allotment",
+          "named": true
+        },
+        {
+          "type": "kept_or_destination",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "allotment_clause_src",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "allotment",
+          "named": true
+        },
+        {
+          "type": "source",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "application",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "asset_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "asset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "color_constraint",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dest_account",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dest_allotment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "allotment_clause_dest",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dest_inorder",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "destination_in_order_clause",
+          "named": true
+        },
+        {
+          "type": "kept_or_destination",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dest_oneof",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "destination_in_order_clause",
+          "named": true
+        },
+        {
+          "type": "kept_or_destination",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "destination",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "dest_account",
+          "named": true
+        },
+        {
+          "type": "dest_allotment",
+          "named": true
+        },
+        {
+          "type": "dest_inorder",
+          "named": true
+        },
+        {
+          "type": "dest_oneof",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "destination_in_order_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kept_or_destination",
+          "named": true
+        },
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "destination_to",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "destination",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fn_call_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_call",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "overdraft",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "function_call_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_call_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "infix_expr",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      },
+      "op": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "/",
+            "named": false
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "kept_or_destination",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "destination_kept",
+          "named": true
+        },
+        {
+          "type": "destination_to",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "monetary_literal",
+    "named": true,
+    "fields": {
+      "amount": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      },
+      "asset": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "number_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parenthesized_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "percentage_portion_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "percentage_portion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "portioned_allotment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "program",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "statement",
+          "named": true
+        },
+        {
+          "type": "vars_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "remaining_allotment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "save_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sent_value",
+          "named": true
+        },
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "send_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "destination",
+          "named": true
+        },
+        {
+          "type": "sent_value",
+          "named": true
+        },
+        {
+          "type": "source",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sent_all_lit",
+    "named": true,
+    "fields": {
+      "asset": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sent_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "account_literal",
+          "named": true
+        },
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "asset_literal",
+          "named": true
+        },
+        {
+          "type": "infix_expr",
+          "named": true
+        },
+        {
+          "type": "monetary_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expr",
+          "named": true
+        },
+        {
+          "type": "percentage_portion_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sent_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "sent_all_lit",
+          "named": true
+        },
+        {
+          "type": "sent_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "src_account",
+          "named": true
+        },
+        {
+          "type": "src_account_bounded_overdraft",
+          "named": true
+        },
+        {
+          "type": "src_account_unbounded_overdraft",
+          "named": true
+        },
+        {
+          "type": "src_allotment",
+          "named": true
+        },
+        {
+          "type": "src_capped",
+          "named": true
+        },
+        {
+          "type": "src_inorder",
+          "named": true
+        },
+        {
+          "type": "src_oneof",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_account",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_constraint",
+          "named": true
+        },
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_account_bounded_overdraft",
+    "named": true,
+    "fields": {
+      "address": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      },
+      "max_overdraft": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "color_constraint",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_account_unbounded_overdraft",
+    "named": true,
+    "fields": {
+      "address": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "color_constraint",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_allotment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "allotment_clause_src",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_capped",
+    "named": true,
+    "fields": {
+      "cap": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "value_expr",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "source",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_inorder",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "source",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "src_oneof",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "source",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "fn_call_statement",
+          "named": true
+        },
+        {
+          "type": "save_statement",
+          "named": true
+        },
+        {
+          "type": "send_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "account_literal",
+          "named": true
+        },
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "asset_literal",
+          "named": true
+        },
+        {
+          "type": "infix_expr",
+          "named": true
+        },
+        {
+          "type": "monetary_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expr",
+          "named": true
+        },
+        {
+          "type": "percentage_portion_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "var_declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "variable_name",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "var_origin",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "var_origin",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "value_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "vars_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "var_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "account_text",
+    "named": true
+  },
+  {
+    "type": "account_var",
+    "named": true
+  },
+  {
+    "type": "allowing",
+    "named": false
+  },
+  {
+    "type": "asset",
+    "named": true
+  },
+  {
+    "type": "destination",
+    "named": false
+  },
+  {
+    "type": "destination_kept",
+    "named": true
+  },
+  {
+    "type": "from",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "line_comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "max",
+    "named": false
+  },
+  {
+    "type": "multiline_comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "oneof",
+    "named": false
+  },
+  {
+    "type": "overdraft",
+    "named": false
+  },
+  {
+    "type": "percentage_portion",
+    "named": true
+  },
+  {
+    "type": "remaining",
+    "named": false
+  },
+  {
+    "type": "save",
+    "named": false
+  },
+  {
+    "type": "send",
+    "named": false
+  },
+  {
+    "type": "source",
+    "named": false
+  },
+  {
+    "type": "string",
+    "named": true
+  },
+  {
+    "type": "to",
+    "named": false
+  },
+  {
+    "type": "unbounded",
+    "named": false
+  },
+  {
+    "type": "up",
+    "named": false
+  },
+  {
+    "type": "variable_name",
+    "named": true
+  },
+  {
+    "type": "vars",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]
