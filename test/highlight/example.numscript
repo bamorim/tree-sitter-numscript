@@ -3,6 +3,7 @@ vars {
   account $source
   account $dest
   monetary $amount = [USD 100]
+  string $subacc
 }
 
 send [USD 100] (
@@ -27,5 +28,5 @@ send $amount (
    testing overdraft */
 send [COIN *] (
   source = @treasury allowing unbounded overdraft
-  destination = @users:alice
+  destination = @users:alice:$subacc
 )

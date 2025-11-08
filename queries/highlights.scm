@@ -53,6 +53,7 @@
 ; Account addresses
 (account_literal) @string.special
 (account_text) @string.special
+(account_var) @variable
 
 ; Comments
 (line_comment) @comment
